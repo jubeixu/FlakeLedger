@@ -8,3 +8,9 @@ All notable changes to this project are documented here.
 
 ### Added
 - `report` ranks flakes by combined compute + developer-wait cost and names
+  the tests worth fixing or deleting.
+- `docs/assets/flake-tax.svg`: the flake taxonomy diagram.
+- Sample runs extended to six attempts across three commits.
+
+### Changed
+- Cost model rates are declared inputs with documented defaults, not
