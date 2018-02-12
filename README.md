@@ -1,0 +1,50 @@
+# FlakeLedger
+
+![FlakeLedger wordmark, flake in slate and ledger in teal, with a mark showing one commit run twice with a failing and a passing attempt](docs/assets/logo.svg)
+
+FlakeLedger reads JUnit XML result files from many CI runs, decides which
+failing tests are flakes and which are genuine failures by comparing outcomes
+across reruns of the same commit, then attributes a compute cost and a
+developer wait cost to each flake and ranks them. The output is a report that
+names specific tests worth fixing or deleting.
+
+Python 3.11, standard library only. No third party dependencies, no network
+access.
+
+<div align="center">
+
+**67.5008 USD of flaky test cost across the sample runs**
+
+Charged to two tests, `test_apply_coupon` and `test_replica_catchup`, using the
+default rates. Those rates are declared inputs you should replace with your own
+measurements, not universal truths.
+
+</div>
+
+You probably recognise the situation the tool is built for. A pull request goes
+red, someone re-runs the job, it goes green, and the change merges. Nobody
+recorded that the first run failed or which test caused it, and the same test
+will do it again next week to somebody else. The waste is real but spread across
+many people and never added up. FlakeLedger adds it up from the XML your CI
+already produces, so the argument for fixing a specific test stops being a
+feeling and becomes a line in a ranked table.
+
+## How it decides what is a flake
+
+The unit of judgement is one test on one commit, across every rerun attempt of
+that commit. Because the code does not change between reruns of the same commit,
+a test that both passes and fails there cannot be blaming the code: something
+other than the code under test decided the outcome, which is the operational
+definition FlakeLedger uses.
+
+The four labels, and the exact rule behind each:
+
+| Label | Rule | Meaning |
+|-------|------|---------|
+| flake | passed on one attempt and failed on another, same commit | outcome depends on something other than the code |
+| genuine_failure | every attempt failed, same commit | the failure reproduces, so it is real |
+| stable | every attempt passed or skipped, no failure | nothing to act on |
+| undetermined | failed on its only attempt for that commit | one observation, no rerun to compare against |
+
+The comparison is always within a single commit. FlakeLedger never compares a
+failure on commit A against a pass on commit B and calls the difference a flake,
