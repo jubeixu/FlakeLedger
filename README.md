@@ -48,3 +48,23 @@ The four labels, and the exact rule behind each:
 
 The comparison is always within a single commit. FlakeLedger never compares a
 failure on commit A against a pass on commit B and calls the difference a flake,
+because the code changed between those commits, so a differing outcome is
+expected. Holding the commit constant is what makes the judgement sound, and the
+design decisions section explains why that boundary is the unit.
+
+## The undetermined case and why it refuses to guess
+
+The hard case is a test that failed and was never re-run for that commit. With a
+single observation there is no second attempt to compare against, so the data
+cannot distinguish a flake from a genuine failure. A tool that guessed here
+would be inventing a fact it does not have.
+
+FlakeLedger refuses to guess. By default a single failing attempt is labelled
+`undetermined`, and that label is a finding in its own right: it tells you the
+data is insufficient, not that the test is fine. If you want a decision anyway,
+you choose the rule explicitly with `--single-fail-policy`, and the chosen
+policy is printed at the top of the output so the decision is never hidden:
+
+| Policy value | Effect on a single failing attempt |
+|--------------|------------------------------------|
+| `undetermined` (default) | labelled undetermined, refuses to guess |
