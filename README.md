@@ -88,3 +88,23 @@ Or run without installing by putting the sources on the path:
 ```
 set PYTHONPATH=src
 python -m FlakeLedger version
+```
+
+That prints `FlakeLedger 0.1.0` and exits clean.
+
+## Commands
+
+| Command | What it does |
+|---------|--------------|
+| `ingest` | parse JUnit XML and list every case result, one per line |
+| `classify` | label each test on each commit as flake, genuine, stable, undetermined |
+| `cost` | rank flaky tests by attributed cost using explicit rates |
+| `version` | print the version and exit |
+
+Run identity is read from each `testsuite`, either as `commit` and `attempt`
+attributes or as `<property>` entries. Point any command at files or at a
+directory of `*.xml`. A directory expands to its `*.xml` files, sorted by name;
+a file is used as itself. Nonexistent paths are ignored, and if the whole input
+set resolves to no XML files the command exits with a usage error rather than
+crashing on a missing file.
+
