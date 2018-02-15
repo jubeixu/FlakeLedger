@@ -127,3 +127,23 @@ Nothing here is a universal truth.
 How to get real values: divide a CI invoice by the compute minutes it billed for
 the compute rate, use a loaded engineering cost per minute for the developer
 rate, and estimate the wait minutes from how long your team loses to one red
+pipeline. All three are knobs; change them and every figure moves, because
+nothing is hardcoded inside the formula.
+
+Wasted compute is the flaky test's own mean runtime times the rerun attempts
+beyond the first, summed over every commit where it flaked, then valued at the
+compute rate. Developer wait cost is `dev-wait-minutes-per-flaky-event` minutes
+per flaky event valued at the developer rate, where a flaky event is one commit
+the test flaked on (two commits means two events).
+
+The compute figure is a deliberate lower bound. It counts only the flaky test's
+own runtime. In real CI a flake usually forces a rerun of a whole job, so the
+true compute waste is larger than reported. FlakeLedger will not guess job
+composition, because that information is not in the JUnit data, so it attributes
+only the part it can measure and states plainly that the real number is higher.
+
+## A worked run over the samples
+
+The `samples/` directory holds hand authored JUnit fixtures spanning four
+commits with reruns. The three stages below are a single run of the pipeline
+over those files, ingest to classify to cost, captured verbatim.
