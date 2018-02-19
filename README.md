@@ -147,3 +147,23 @@ only the part it can measure and states plainly that the real number is higher.
 The `samples/` directory holds hand authored JUnit fixtures spanning four
 commits with reruns. The three stages below are a single run of the pipeline
 over those files, ingest to classify to cost, captured verbatim.
+
+Ingest lists every case result. Command:
+
+```
+python -m FlakeLedger ingest samples
+```
+
+```
+cases 25
+commits 4
+commit 99aa88
+commit a1b2c3
+commit b7c8d9
+commit d4e5f6
+case 99aa88 attempt=1 tests.auth.test_login.test_valid_password passed time=0.100s
+case 99aa88 attempt=1 tests.payments.test_checkout.test_apply_coupon passed time=0.790s
+case 99aa88 attempt=1 tests.payments.test_checkout.test_total_with_tax passed time=0.218s
+case a1b2c3 attempt=1 tests.auth.test_login.test_valid_password passed time=0.104s
+case a1b2c3 attempt=1 tests.payments.test_checkout.test_apply_coupon failed time=0.812s
+case a1b2c3 attempt=1 tests.payments.test_checkout.test_total_with_tax passed time=0.221s
