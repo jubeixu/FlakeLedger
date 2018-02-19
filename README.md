@@ -187,3 +187,23 @@ policy single_fail=undetermined
 count flake 3
 count genuine_failure 2
 count stable 9
+class tests.auth.test_login.test_valid_password @ 99aa88 stable attempts=1 pass=1 fail=0 skip=0 (all 1 attempt(s) passed or skipped, no failures)
+... (8 more stable rows trimmed for length, 9 stable total; the findings are)
+class tests.integration.test_sync.test_replica_catchup @ b7c8d9 flake attempts=2 pass=1 fail=1 skip=0 (same commit produced 1 pass(es) and 1 failure(s) across 2 attempts)
+class tests.payments.test_checkout.test_apply_coupon @ a1b2c3 flake attempts=2 pass=1 fail=1 skip=0 (same commit produced 1 pass(es) and 1 failure(s) across 2 attempts)
+class tests.payments.test_checkout.test_apply_coupon @ d4e5f6 flake attempts=2 pass=1 fail=1 skip=0 (same commit produced 1 pass(es) and 1 failure(s) across 2 attempts)
+class tests.reports.test_export.test_pdf_header @ a1b2c3 genuine_failure attempts=2 pass=0 fail=2 skip=0 (all 2 attempts failed, failure reproduces)
+class tests.reports.test_export.test_pdf_header @ d4e5f6 genuine_failure attempts=2 pass=0 fail=2 skip=0 (all 2 attempts failed, failure reproduces)
+```
+
+Cost charges only the flakes and ranks them. Command:
+
+```
+python -m FlakeLedger cost samples
+```
+
+```
+rates:
+  compute_rate_per_minute 0.0080 USD/min
+  dev_rate_per_minute 1.5000 USD/min
+  dev_wait_minutes_per_flaky_event 15.00 min
