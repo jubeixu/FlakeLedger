@@ -266,3 +266,23 @@ Surefire, and similar tools: a `testsuites` root, or a single `testsuite`,
 containing `testcase` elements. Each `testcase` carries its outcome in a child
 element:
 
+| Child element | Outcome recorded |
+|---------------|------------------|
+| `<failure>` or `<error>` | failed |
+| `<skipped>` | skipped |
+| no child element | passed |
+
+Runtime is read from the `time` attribute in seconds. If a producer omits it,
+that test contributes zero compute waste.
+
+Run identity is not part of the base JUnit schema, so a producer must supply it.
+The parser accepts two fixture styles for the `commit` and `attempt` markers,
+and both are exercised by the samples.
+
+Style one, attributes on a bare `<testsuite>` (see
+`samples/run-a1b2c3-attempt1.xml`):
+
+```
+<testsuite name="payments" commit="a1b2c3" attempt="1" tests="4" failures="2">
+  <testcase classname="tests.payments.test_checkout" name="test_apply_coupon" time="0.812"/>
+</testsuite>
