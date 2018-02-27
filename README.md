@@ -306,3 +306,22 @@ When both markers are absent, FlakeLedger falls back to documented defaults
 (`commit=unknown-commit`, `attempt=1`) and records a warning rather than
 guessing silently. The `attempt` value defaults to 1 for the first run and rises
 for each rerun of the same commit.
+
+## Output format
+
+All output is line oriented plain text so two runs diff cleanly in git. The
+fields per command are a contract:
+
+| Command | Field | Meaning |
+|---------|-------|---------|
+| ingest | `case <commit>` | the commit the run was for |
+| ingest | `attempt=<n>` | the rerun index, 1 for the first run |
+| ingest | `<test_id>` | classname joined to name, the stable identifier |
+| ingest | `<status>` | passed, failed, or skipped |
+| ingest | `time=<s>s` | runtime in seconds, three decimal places |
+| classify | `class <test_id> @ <commit>` | the test and commit judged |
+| classify | `<label>` | flake, genuine_failure, stable, or undetermined |
+| classify | `attempts=<n>` | how many rerun attempts were seen |
+| classify | `pass= fail= skip=` | outcome counts across those attempts |
+| classify | `(<reason>)` | the plain language rule that produced the label |
+| cost | `events=<n>` | commits where the test flaked |
