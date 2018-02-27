@@ -385,3 +385,23 @@ The honest limits of the tool, kept and expanded:
   delay.
 - It does not read vendor specific fields beyond the common JUnit schema plus
   the `commit` and `attempt` markers.
+
+## Design decisions
+
+The reasoning behind the choices that shaped the tool, including the alternative
+that was rejected.
+
+Same commit reruns are the unit of judgement. The alternative was to compare a
+test's outcome across different commits: if it passed on Monday and failed on
+Tuesday, call it flaky. That was rejected because the code changed between those
+commits, so a differing outcome is expected and proves nothing about
+nondeterminism. Holding the commit constant is the only way to isolate flakiness
+from real regressions, so the commit boundary is the unit and the tool never
+crosses it.
+
+Undetermined is the default for a single failing attempt. The alternative was to
+pick a side automatically, either assuming a retry would have passed (flake) or
+assuming the failure was real (genuine). Both were rejected as dishonest
+defaults: with one observation the data genuinely does not decide, and silently
+choosing either way would either inflate the flake bill with broken tests or
+bury real flakes. Surfacing `undetermined` as its own finding tells the user to
