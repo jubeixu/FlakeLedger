@@ -5,3 +5,5 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "flakeledger"
 version = "0.1.0"
+description = "Quantify the compute and developer time cost of flaky tests from JUnit XML."
+readme = "README.md"
