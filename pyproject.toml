@@ -13,3 +13,5 @@ authors = [{ name = "FlakeLedger contributors" }]
 keywords = ["junit", "flaky-tests", "ci", "test-analytics"]
 
 [project.scripts]
+flakeledger = "flakeledger.cli:main"
+
