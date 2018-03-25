@@ -17,3 +17,14 @@ Two attributes drive the rest of the pipeline:
 These are read from the `testsuite` (or `testsuites`) element. They are not
 part of the base JUnit schema, so a producer must set them as attributes or
 as `<property>` entries. When they are absent we fall back to documented
+defaults and record that we did so, rather than guessing silently.
+"""
+
+from __future__ import annotations
+
+import xml.etree.ElementTree as ET
+from dataclasses import dataclass
+from pathlib import Path
+
+PASSED = "passed"
+FAILED = "failed"
