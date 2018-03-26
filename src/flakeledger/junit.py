@@ -40,3 +40,15 @@ class CaseResult:
 
     commit: str
     attempt: int
+    suite: str
+    classname: str
+    name: str
+    status: str
+    time_seconds: float
+    source_file: str
+
+    @property
+    def test_id(self) -> str:
+        """Stable identifier for a test across runs.
+
+        Combines classname and name. When classname is empty we use the
