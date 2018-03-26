@@ -52,3 +52,15 @@ class CaseResult:
         """Stable identifier for a test across runs.
 
         Combines classname and name. When classname is empty we use the
+        name alone. This is what groups reruns of the same test together.
+        """
+
+        if self.classname:
+            return f"{self.classname}.{self.name}"
+        return self.name
+
+
+def _read_run_metadata(elem: ET.Element) -> tuple[str, int, bool]:
+    """Return (commit, attempt, used_default) from a suite-level element.
+
+    Reads attributes first, then `<property name=...>` children. Missing
