@@ -28,3 +28,15 @@ from pathlib import Path
 
 PASSED = "passed"
 FAILED = "failed"
+SKIPPED = "skipped"
+
+_UNKNOWN_COMMIT = "unknown-commit"
+_DEFAULT_ATTEMPT = 1
+
+
+@dataclass(frozen=True)
+class CaseResult:
+    """One test case outcome within one CI run."""
+
+    commit: str
+    attempt: int
