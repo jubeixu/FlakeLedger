@@ -100,3 +100,15 @@ def _case_status(case: ET.Element) -> str:
         tag = child.tag.lower()
         if tag in ("failure", "error"):
             return FAILED
+        if tag == "skipped":
+            return SKIPPED
+    return PASSED
+
+
+def _parse_time(value: str | None) -> float:
+    if value is None:
+        return 0.0
+    try:
+        return float(value)
+    except ValueError:
+        return 0.0
