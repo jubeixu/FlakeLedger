@@ -64,3 +64,15 @@ def _read_run_metadata(elem: ET.Element) -> tuple[str, int, bool]:
     """Return (commit, attempt, used_default) from a suite-level element.
 
     Reads attributes first, then `<property name=...>` children. Missing
+    values fall back to documented defaults and set used_default to True.
+    """
+
+    commit = elem.get("commit")
+    attempt_raw = elem.get("attempt")
+
+    if commit is None or attempt_raw is None:
+        for prop in elem.iter("property"):
+            pname = prop.get("name")
+            if pname == "commit" and commit is None:
+                commit = prop.get("value")
+            elif pname == "attempt" and attempt_raw is None:
