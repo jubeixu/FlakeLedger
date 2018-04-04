@@ -88,3 +88,15 @@ def _read_run_metadata(elem: ET.Element) -> tuple[str, int, bool]:
     else:
         try:
             attempt = int(attempt_raw)
+        except ValueError:
+            attempt = _DEFAULT_ATTEMPT
+            used_default = True
+
+    return commit, attempt, used_default
+
+
+def _case_status(case: ET.Element) -> str:
+    for child in case:
+        tag = child.tag.lower()
+        if tag in ("failure", "error"):
+            return FAILED
