@@ -76,3 +76,15 @@ def _read_run_metadata(elem: ET.Element) -> tuple[str, int, bool]:
             if pname == "commit" and commit is None:
                 commit = prop.get("value")
             elif pname == "attempt" and attempt_raw is None:
+                attempt_raw = prop.get("value")
+
+    used_default = False
+    if commit is None:
+        commit = _UNKNOWN_COMMIT
+        used_default = True
+    if attempt_raw is None:
+        attempt = _DEFAULT_ATTEMPT
+        used_default = True
+    else:
+        try:
+            attempt = int(attempt_raw)
