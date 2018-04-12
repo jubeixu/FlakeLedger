@@ -148,3 +148,15 @@ def parse_file(path: str | Path) -> tuple[list[CaseResult], list[str]]:
         commit, attempt, used_default = _read_run_metadata(suite)
         if used_default:
             fallback = _read_run_metadata(root)
+            commit_r, attempt_r, root_default = fallback
+            if not root_default:
+                commit, attempt, used_default = commit_r, attempt_r, False
+
+        if used_default:
+            warnings.append(
+                f"{path.name}: suite '{suite.get('name', '')}' missing commit "
+                f"or attempt metadata, used defaults "
+                f"(commit={commit}, attempt={attempt})"
+            )
+
+        suite_name = suite.get("name", "")
