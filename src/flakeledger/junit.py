@@ -136,3 +136,15 @@ def parse_file(path: str | Path) -> tuple[list[CaseResult], list[str]]:
     tree = ET.parse(path)
     root = tree.getroot()
 
+    results: list[CaseResult] = []
+    seen_suites: set[int] = set()
+
+    for suite in _iter_suites(root):
+        marker = id(suite)
+        if marker in seen_suites:
+            continue
+        seen_suites.add(marker)
+
+        commit, attempt, used_default = _read_run_metadata(suite)
+        if used_default:
+            fallback = _read_run_metadata(root)
