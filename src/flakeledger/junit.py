@@ -124,3 +124,15 @@ def _iter_suites(root: ET.Element):
         yield suite
 
 
+def parse_file(path: str | Path) -> tuple[list[CaseResult], list[str]]:
+    """Parse one JUnit XML file.
+
+    Returns (results, warnings). Warnings are human readable strings, one per
+    condition worth surfacing, for example a suite that lacked commit metadata.
+    """
+
+    path = Path(path)
+    warnings: list[str] = []
+    tree = ET.parse(path)
+    root = tree.getroot()
+
