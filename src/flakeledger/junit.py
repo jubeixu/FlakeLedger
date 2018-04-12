@@ -112,3 +112,15 @@ def _parse_time(value: str | None) -> float:
         return float(value)
     except ValueError:
         return 0.0
+
+
+def _iter_suites(root: ET.Element):
+    """Yield every testsuite element, whether root is a suite or a suites set."""
+
+    tag = root.tag.lower()
+    if tag == "testsuite":
+        yield root
+    for suite in root.iter("testsuite"):
+        yield suite
+
+
