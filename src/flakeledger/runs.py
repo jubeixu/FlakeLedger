@@ -14,3 +14,11 @@ from flakeledger.junit import FAILED, PASSED, SKIPPED, CaseResult
 
 
 @dataclass
+class TestOnCommit:
+    """All attempts of one test against one commit."""
+
+    test_id: str
+    commit: str
+    attempts: list[CaseResult] = field(default_factory=list)
+
+    @property
