@@ -22,3 +22,11 @@ class TestOnCommit:
     attempts: list[CaseResult] = field(default_factory=list)
 
     @property
+    def attempt_count(self) -> int:
+        return len(self.attempts)
+
+    @property
+    def statuses(self) -> list[str]:
+        # Ordered by attempt number for stable, diffable output.
+        return [a.status for a in sorted(self.attempts, key=lambda c: c.attempt)]
+
