@@ -6,3 +6,11 @@ three times, a test has up to three attempt records here.
 """
 
 from __future__ import annotations
+
+from collections import defaultdict
+from dataclasses import dataclass, field
+
+from flakeledger.junit import FAILED, PASSED, SKIPPED, CaseResult
+
+
+@dataclass
