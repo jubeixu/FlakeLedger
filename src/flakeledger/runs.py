@@ -30,3 +30,10 @@ class TestOnCommit:
         # Ordered by attempt number for stable, diffable output.
         return [a.status for a in sorted(self.attempts, key=lambda c: c.attempt)]
 
+    @property
+    def passes(self) -> int:
+        return sum(1 for a in self.attempts if a.status == PASSED)
+
+    @property
+    def failures(self) -> int:
+        return sum(1 for a in self.attempts if a.status == FAILED)
