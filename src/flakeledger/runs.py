@@ -45,3 +45,11 @@ class TestOnCommit:
     @property
     def total_time_seconds(self) -> float:
         return sum(a.time_seconds for a in self.attempts)
+
+    @property
+    def mean_time_seconds(self) -> float:
+        if not self.attempts:
+            return 0.0
+        return self.total_time_seconds / len(self.attempts)
+
+
