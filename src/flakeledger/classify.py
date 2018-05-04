@@ -10,3 +10,12 @@ Definitions used here, stated so the label is auditable:
 
   GENUINE_FAILURE
     Every attempt of the test on that commit failed. The failure reproduces,
+    so it is attributable to the code or the test, not to nondeterminism.
+
+  STABLE
+    Every attempt passed (or was skipped with at least one pass and no
+    failure). Nothing to act on.
+
+  UNDETERMINED
+    Only one attempt exists for that commit and it failed. With a single
+    observation we cannot distinguish a flake from a genuine failure: a
