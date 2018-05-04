@@ -37,3 +37,11 @@ class TestOnCommit:
     @property
     def failures(self) -> int:
         return sum(1 for a in self.attempts if a.status == FAILED)
+
+    @property
+    def skips(self) -> int:
+        return sum(1 for a in self.attempts if a.status == SKIPPED)
+
+    @property
+    def total_time_seconds(self) -> float:
+        return sum(a.time_seconds for a in self.attempts)
