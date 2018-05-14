@@ -19,3 +19,12 @@ Definitions used here, stated so the label is auditable:
   UNDETERMINED
     Only one attempt exists for that commit and it failed. With a single
     observation we cannot distinguish a flake from a genuine failure: a
+    rerun never happened. We refuse to guess. The explicit rule for this
+    ambiguous case is configurable and defaults to UNDETERMINED so a single
+    red run is never silently counted as either category. Callers who want a
+    conservative flake hunt can set the policy to treat it as GENUINE_FAILURE,
+    and callers who assume retries would have cleared it can set FLAKE. The
+    chosen policy is recorded in the output.
+"""
+
+from __future__ import annotations
