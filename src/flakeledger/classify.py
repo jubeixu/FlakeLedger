@@ -28,3 +28,12 @@ Definitions used here, stated so the label is auditable:
 """
 
 from __future__ import annotations
+
+from dataclasses import dataclass
+
+from flakeledger.runs import TestOnCommit
+
+FLAKE = "flake"
+GENUINE_FAILURE = "genuine_failure"
+STABLE = "stable"
+UNDETERMINED = "undetermined"
