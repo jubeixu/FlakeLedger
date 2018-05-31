@@ -37,3 +37,12 @@ FLAKE = "flake"
 GENUINE_FAILURE = "genuine_failure"
 STABLE = "stable"
 UNDETERMINED = "undetermined"
+
+# Policies for the single-attempt-failed ambiguous case.
+SINGLE_FAIL_UNDETERMINED = "undetermined"
+SINGLE_FAIL_GENUINE = "genuine"
+SINGLE_FAIL_FLAKE = "flake"
+
+_SINGLE_FAIL_POLICIES = (
+    SINGLE_FAIL_UNDETERMINED,
+    SINGLE_FAIL_GENUINE,
