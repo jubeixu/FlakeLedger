@@ -46,3 +46,12 @@ SINGLE_FAIL_FLAKE = "flake"
 _SINGLE_FAIL_POLICIES = (
     SINGLE_FAIL_UNDETERMINED,
     SINGLE_FAIL_GENUINE,
+    SINGLE_FAIL_FLAKE,
+)
+
+
+@dataclass(frozen=True)
+class Classification:
+    test_id: str
+    commit: str
+    label: str
