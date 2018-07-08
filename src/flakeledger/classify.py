@@ -55,3 +55,12 @@ class Classification:
     test_id: str
     commit: str
     label: str
+    attempt_count: int
+    passes: int
+    failures: int
+    skips: int
+    reason: str
+
+
+def classify_one(
+    record: TestOnCommit,
