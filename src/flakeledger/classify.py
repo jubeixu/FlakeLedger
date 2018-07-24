@@ -64,3 +64,12 @@ class Classification:
 
 def classify_one(
     record: TestOnCommit,
+    single_fail_policy: str = SINGLE_FAIL_UNDETERMINED,
+) -> Classification:
+    passes = record.passes
+    failures = record.failures
+    skips = record.skips
+    n = record.attempt_count
+
+    if failures == 0:
+        label = STABLE
