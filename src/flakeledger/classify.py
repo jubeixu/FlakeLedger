@@ -73,3 +73,12 @@ def classify_one(
 
     if failures == 0:
         label = STABLE
+        reason = f"all {n} attempt(s) passed or skipped, no failures"
+    elif passes > 0 and failures > 0:
+        label = FLAKE
+        reason = (
+            f"same commit produced {passes} pass(es) and {failures} "
+            f"failure(s) across {n} attempts"
+        )
+    elif n == 1:
+        # Single attempt, and it failed. Ambiguous by construction.
