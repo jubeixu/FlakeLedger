@@ -91,3 +91,12 @@ def classify_one(
         else:
             label = UNDETERMINED
             reason = "single failing attempt, no rerun to compare, undetermined"
+    else:
+        label = GENUINE_FAILURE
+        reason = f"all {n} attempts failed, failure reproduces"
+
+    return Classification(
+        test_id=record.test_id,
+        commit=record.commit,
+        label=label,
+        attempt_count=n,
