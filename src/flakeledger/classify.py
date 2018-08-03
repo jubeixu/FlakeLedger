@@ -82,3 +82,12 @@ def classify_one(
         )
     elif n == 1:
         # Single attempt, and it failed. Ambiguous by construction.
+        if single_fail_policy == SINGLE_FAIL_GENUINE:
+            label = GENUINE_FAILURE
+            reason = "single failing attempt, policy treats it as genuine"
+        elif single_fail_policy == SINGLE_FAIL_FLAKE:
+            label = FLAKE
+            reason = "single failing attempt, policy treats it as flake"
+        else:
+            label = UNDETERMINED
+            reason = "single failing attempt, no rerun to compare, undetermined"
