@@ -9,3 +9,12 @@ Two costs are attributed to a flaky test:
   Wasted compute minutes
     A flake causes reruns that would not have happened if the test were
     reliable. We count the extra attempts beyond the first as wasted, and
+    multiply the flaky test's mean runtime by the number of extra attempts,
+    then convert to a money figure with `compute_rate_per_minute`.
+
+    This is a lower bound. In real CI a single flaky test usually forces a
+    rerun of an entire job, not just itself, so the true compute waste is
+    larger. We deliberately attribute only the test's own time because that
+    is the part we can measure from the JUnit data without guessing job
+    composition. This limitation is stated in the README.
+
