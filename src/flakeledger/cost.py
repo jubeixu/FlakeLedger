@@ -27,3 +27,12 @@ Two costs are attributed to a flaky test:
 All rates carry units in their names. Nothing is hardcoded inside the
 formula: change the rates and every number moves.
 """
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+
+from flakeledger.classify import FLAKE, Classification
+from flakeledger.runs import TestOnCommit
+
+# Documented default rates. These are placeholders, not measurements.
