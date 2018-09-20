@@ -18,3 +18,12 @@ Two costs are attributed to a flaky test:
     is the part we can measure from the JUnit data without guessing job
     composition. This limitation is stated in the README.
 
+  Developer wait cost
+    A red pipeline blocks the developer who is waiting on it. We model this
+    as `dev_wait_minutes_per_flaky_event` minutes of human time per flaky
+    event (one event per commit where the test flaked), valued at
+    `dev_rate_per_minute`. Both numbers are inputs.
+
+All rates carry units in their names. Nothing is hardcoded inside the
+formula: change the rates and every number moves.
+"""
