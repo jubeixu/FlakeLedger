@@ -36,3 +36,11 @@ from flakeledger.classify import FLAKE, Classification
 from flakeledger.runs import TestOnCommit
 
 # Documented default rates. These are placeholders, not measurements.
+# Sources for your own values: CI invoice divided by billed minutes for the
+# compute rate, and loaded engineering cost per minute for the developer rate.
+DEFAULT_COMPUTE_RATE_PER_MINUTE = 0.008  # currency units per compute minute
+DEFAULT_DEV_RATE_PER_MINUTE = 1.50  # currency units per developer minute
+DEFAULT_DEV_WAIT_MINUTES_PER_FLAKY_EVENT = 15.0  # minutes lost per flaky event
+
+
+@dataclass(frozen=True)
