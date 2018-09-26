@@ -53,3 +53,12 @@ class Rates:
 @dataclass(frozen=True)
 class TestCost:
     test_id: str
+    flaky_events: int
+    wasted_compute_minutes: float
+    dev_wait_minutes: float
+    compute_cost: float
+    dev_cost: float
+
+    @property
+    def total_cost(self) -> float:
+        return self.compute_cost + self.dev_cost
