@@ -62,3 +62,12 @@ class TestCost:
     @property
     def total_cost(self) -> float:
         return self.compute_cost + self.dev_cost
+
+
+def _extra_attempts(record: TestOnCommit) -> int:
+    # Attempts beyond the first are reruns that a reliable test would avoid.
+    return max(record.attempt_count - 1, 0)
+
+
+def cost_for_flaky_tests(
+    records: list[TestOnCommit],
