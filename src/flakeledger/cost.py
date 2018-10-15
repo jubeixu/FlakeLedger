@@ -71,3 +71,12 @@ def _extra_attempts(record: TestOnCommit) -> int:
 
 def cost_for_flaky_tests(
     records: list[TestOnCommit],
+    classifications: list[Classification],
+    rates: Rates,
+) -> list[TestCost]:
+    """Compute per-test cost, aggregated across every commit where it flaked.
+
+    Only tests classified FLAKE on at least one commit are charged. Output is
+    ranked by total cost descending, ties broken by test_id for determinism.
+    """
+
