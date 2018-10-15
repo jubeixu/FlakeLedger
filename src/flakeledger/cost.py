@@ -80,3 +80,11 @@ def cost_for_flaky_tests(
     ranked by total cost descending, ties broken by test_id for determinism.
     """
 
+    flake_keys = {
+        (c.test_id, c.commit) for c in classifications if c.label == FLAKE
+    }
+    record_by_key = {(r.test_id, r.commit): r for r in records}
+
+    agg: dict[str, dict[str, float]] = {}
+    for (test_id, commit) in sorted(flake_keys):
+        record = record_by_key[(test_id, commit)]
