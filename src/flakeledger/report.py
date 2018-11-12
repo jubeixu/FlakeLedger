@@ -43,3 +43,13 @@ def render_classify(
         lines.append(
             f"class {c.test_id} @ {c.commit} {c.label} "
             f"attempts={c.attempt_count} pass={c.passes} "
+            f"fail={c.failures} skip={c.skips} ({c.reason})"
+        )
+    return "\n".join(lines) + "\n"
+
+
+def render_cost(costs: list[TestCost], rates: Rates, currency: str) -> str:
+    lines: list[str] = []
+    lines.append("rates:")
+    lines.append(
+        f"  compute_rate_per_minute {rates.compute_rate_per_minute:.4f} "
