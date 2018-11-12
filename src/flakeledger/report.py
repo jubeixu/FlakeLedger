@@ -62,3 +62,12 @@ def render_cost(costs: list[TestCost], rates: Rates, currency: str) -> str:
         f"  dev_wait_minutes_per_flaky_event "
         f"{rates.dev_wait_minutes_per_flaky_event:.2f} min"
     )
+    lines.append("")
+    lines.append("ranked flaky test cost (highest first):")
+
+    if not costs:
+        lines.append("  none: no test was classified as a flake")
+        return "\n".join(lines) + "\n"
+
+    total = 0.0
+    for i, c in enumerate(costs, start=1):
