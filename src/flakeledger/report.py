@@ -25,3 +25,12 @@ def render_ingest(results: list[CaseResult], warnings: list[str]) -> str:
             f"{r.status} time={r.time_seconds:.3f}s"
         )
     for w in warnings:
+        lines.append(f"warning {w}")
+    return "\n".join(lines) + "\n"
+
+
+def render_classify(
+    classifications: list[Classification], policy: str
+) -> str:
+    lines: list[str] = []
+    lines.append(f"policy single_fail={policy}")
