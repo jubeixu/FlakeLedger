@@ -16,3 +16,12 @@ def render_ingest(results: list[CaseResult], warnings: list[str]) -> str:
     lines: list[str] = []
     lines.append(f"cases {len(results)}")
     commits = sorted({r.commit for r in results})
+    lines.append(f"commits {len(commits)}")
+    for c in commits:
+        lines.append(f"commit {c}")
+    for r in sorted(results, key=lambda x: (x.commit, x.attempt, x.test_id)):
+        lines.append(
+            f"case {r.commit} attempt={r.attempt} {r.test_id} "
+            f"{r.status} time={r.time_seconds:.3f}s"
+        )
+    for w in warnings:
