@@ -53,3 +53,12 @@ def render_cost(costs: list[TestCost], rates: Rates, currency: str) -> str:
     lines.append("rates:")
     lines.append(
         f"  compute_rate_per_minute {rates.compute_rate_per_minute:.4f} "
+        f"{currency}/min"
+    )
+    lines.append(
+        f"  dev_rate_per_minute {rates.dev_rate_per_minute:.4f} {currency}/min"
+    )
+    lines.append(
+        f"  dev_wait_minutes_per_flaky_event "
+        f"{rates.dev_wait_minutes_per_flaky_event:.2f} min"
+    )
