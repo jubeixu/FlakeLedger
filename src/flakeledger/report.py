@@ -34,3 +34,12 @@ def render_classify(
 ) -> str:
     lines: list[str] = []
     lines.append(f"policy single_fail={policy}")
+    counts: dict[str, int] = {}
+    for c in classifications:
+        counts[c.label] = counts.get(c.label, 0) + 1
+    for label in sorted(counts):
+        lines.append(f"count {label} {counts[label]}")
+    for c in classifications:
+        lines.append(
+            f"class {c.test_id} @ {c.commit} {c.label} "
+            f"attempts={c.attempt_count} pass={c.passes} "
