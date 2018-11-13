@@ -32,3 +32,17 @@ from flakeledger.classify import (
 from flakeledger.cost import (
     DEFAULT_COMPUTE_RATE_PER_MINUTE,
     DEFAULT_DEV_RATE_PER_MINUTE,
+    DEFAULT_DEV_WAIT_MINUTES_PER_FLAKY_EVENT,
+    Rates,
+    cost_for_flaky_tests,
+)
+from flakeledger.junit import parse_paths
+from flakeledger.runs import group_by_test_commit
+
+EXIT_CLEAN = 0
+EXIT_FINDINGS = 1
+EXIT_USAGE = 2
+
+
+def _collect_xml(paths: list[str]) -> list[Path]:
+    """Expand each path: a directory yields its *.xml files, a file is itself."""
