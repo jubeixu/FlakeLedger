@@ -75,3 +75,18 @@ def _add_policy_arg(sub: argparse.ArgumentParser) -> None:
             SINGLE_FAIL_GENUINE,
             SINGLE_FAIL_FLAKE,
         ],
+        default=SINGLE_FAIL_UNDETERMINED,
+        help=(
+            "how to label a test that failed on its only attempt for a "
+            "commit (default: undetermined, which refuses to guess)"
+        ),
+    )
+
+
+def _build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="flakeledger",
+        description="Quantify the cost of flaky tests from JUnit XML results.",
+    )
+    sub = parser.add_subparsers(dest="command", required=True)
+
