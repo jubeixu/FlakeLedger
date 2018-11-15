@@ -61,3 +61,17 @@ def _collect_xml(paths: list[str]) -> list[Path]:
 
 def _add_input_arg(sub: argparse.ArgumentParser) -> None:
     sub.add_argument(
+        "inputs",
+        nargs="+",
+        help="JUnit XML files or directories containing them",
+    )
+
+
+def _add_policy_arg(sub: argparse.ArgumentParser) -> None:
+    sub.add_argument(
+        "--single-fail-policy",
+        choices=[
+            SINGLE_FAIL_UNDETERMINED,
+            SINGLE_FAIL_GENUINE,
+            SINGLE_FAIL_FLAKE,
+        ],
