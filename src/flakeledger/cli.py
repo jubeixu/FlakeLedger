@@ -90,3 +90,17 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
+    p_ingest = sub.add_parser("ingest", help="parse JUnit XML and list cases")
+    _add_input_arg(p_ingest)
+
+    p_classify = sub.add_parser(
+        "classify", help="label tests as flake, genuine, stable, undetermined"
+    )
+    _add_input_arg(p_classify)
+    _add_policy_arg(p_classify)
+
+    p_cost = sub.add_parser("cost", help="rank flaky tests by attributed cost")
+    _add_input_arg(p_cost)
+    _add_policy_arg(p_cost)
+    p_cost.add_argument(
+        "--compute-rate-per-minute",
