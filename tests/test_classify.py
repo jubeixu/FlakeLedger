@@ -28,3 +28,14 @@ def _all_records():
 class TestClassification(unittest.TestCase):
     def setUp(self):
         self.records = _all_records()
+        self.by_key = {
+            (c.test_id, c.commit): c for c in classify_all(self.records)
+        }
+
+    def test_flake_detected(self):
+        c = self.by_key[
+            ("tests.payments.test_checkout.test_apply_coupon", "a1b2c3")
+        ]
+        self.assertEqual(c.label, FLAKE)
+
+    def test_genuine_failure_detected(self):
