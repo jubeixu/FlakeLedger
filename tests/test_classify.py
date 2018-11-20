@@ -18,3 +18,13 @@ from flakeledger.junit import CaseResult
 
 SAMPLES = Path(__file__).resolve().parents[1] / "samples"
 
+
+def _all_records():
+    files = sorted(str(p) for p in SAMPLES.glob("*.xml"))
+    results, _ = parse_paths(files)
+    return group_by_test_commit(results)
+
+
+class TestClassification(unittest.TestCase):
+    def setUp(self):
+        self.records = _all_records()
