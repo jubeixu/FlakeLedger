@@ -49,3 +49,13 @@ class TestClassification(unittest.TestCase):
             ("tests.auth.test_login.test_valid_password", "a1b2c3")
         ]
         self.assertEqual(c.label, STABLE)
+
+    def test_second_flaky_test_detected(self):
+        c = self.by_key[
+            ("tests.integration.test_sync.test_replica_catchup", "b7c8d9")
+        ]
+        self.assertEqual(c.label, FLAKE)
+
+    def _single_fail_record(self):
+        case = CaseResult(
+            commit="zz9999",
