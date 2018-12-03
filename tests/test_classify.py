@@ -39,3 +39,13 @@ class TestClassification(unittest.TestCase):
         self.assertEqual(c.label, FLAKE)
 
     def test_genuine_failure_detected(self):
+        c = self.by_key[
+            ("tests.reports.test_export.test_pdf_header", "a1b2c3")
+        ]
+        self.assertEqual(c.label, GENUINE_FAILURE)
+
+    def test_stable_detected(self):
+        c = self.by_key[
+            ("tests.auth.test_login.test_valid_password", "a1b2c3")
+        ]
+        self.assertEqual(c.label, STABLE)
