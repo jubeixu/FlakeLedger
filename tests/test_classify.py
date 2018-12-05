@@ -59,3 +59,14 @@ class TestClassification(unittest.TestCase):
     def _single_fail_record(self):
         case = CaseResult(
             commit="zz9999",
+            attempt=1,
+            suite="s",
+            classname="tests.x",
+            name="test_only_once",
+            status="failed",
+            time_seconds=1.0,
+            source_file="x.xml",
+        )
+        return TestOnCommit(
+            test_id="tests.x.test_only_once", commit="zz9999", attempts=[case]
+        )
