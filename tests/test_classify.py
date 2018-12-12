@@ -70,3 +70,13 @@ class TestClassification(unittest.TestCase):
         return TestOnCommit(
             test_id="tests.x.test_only_once", commit="zz9999", attempts=[case]
         )
+
+    def test_single_fail_default_is_undetermined(self):
+        rec = self._single_fail_record()
+        self.assertEqual(
+            classify_one(rec, SINGLE_FAIL_UNDETERMINED).label, UNDETERMINED
+        )
+
+    def test_single_fail_policy_genuine(self):
+        rec = self._single_fail_record()
+        self.assertEqual(
