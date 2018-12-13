@@ -66,3 +66,13 @@ class TestCostModel(unittest.TestCase):
         costs = cost_for_flaky_tests(
             self.records, self.classifications, Rates()
         )
+        totals = [c.total_cost for c in costs]
+        self.assertEqual(totals, sorted(totals, reverse=True))
+
+
+class TestCliExitCodes(unittest.TestCase):
+    def test_version_clean(self):
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            code = cli.main(["version"])
+        self.assertEqual(code, 0)
