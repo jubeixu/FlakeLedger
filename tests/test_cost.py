@@ -56,3 +56,13 @@ class TestCostModel(unittest.TestCase):
         self.assertAlmostEqual(
             coupon.wasted_compute_minutes, expected_wasted, places=6
         )
+        self.assertAlmostEqual(coupon.dev_wait_minutes, 20.0, places=6)
+        self.assertAlmostEqual(
+            coupon.compute_cost, expected_wasted * 0.01, places=6
+        )
+        self.assertAlmostEqual(coupon.dev_cost, 20.0 * 1.0, places=6)
+
+    def test_ranking_descending_by_total(self):
+        costs = cost_for_flaky_tests(
+            self.records, self.classifications, Rates()
+        )
