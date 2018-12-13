@@ -47,3 +47,12 @@ class TestCostModel(unittest.TestCase):
         )
         costs = cost_for_flaky_tests(self.records, self.classifications, rates)
         coupon = next(
+            c
+            for c in costs
+            if c.test_id == "tests.payments.test_checkout.test_apply_coupon"
+        )
+        expected_wasted = (0.800 / 60.0) + (0.8735 / 60.0)
+        self.assertEqual(coupon.flaky_events, 2)
+        self.assertAlmostEqual(
+            coupon.wasted_compute_minutes, expected_wasted, places=6
+        )
