@@ -37,3 +37,13 @@ class TestCostModel(unittest.TestCase):
         )
 
     def test_coupon_cost_matches_hand_calc(self):
+        # coupon flaked on a1b2c3 (mean time of 0.812 and 0.788 = 0.800s) and
+        # d4e5f6 (0.905 and 0.842 = 0.8735s). Each commit had 2 attempts, so
+        # 1 extra attempt each. Wasted minutes = mean/60 * 1.
+        rates = Rates(
+            compute_rate_per_minute=0.01,
+            dev_rate_per_minute=1.0,
+            dev_wait_minutes_per_flaky_event=10.0,
+        )
+        costs = cost_for_flaky_tests(self.records, self.classifications, rates)
+        coupon = next(
