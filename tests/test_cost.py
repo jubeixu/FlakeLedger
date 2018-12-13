@@ -27,3 +27,13 @@ class TestCostModel(unittest.TestCase):
         costs = cost_for_flaky_tests(
             self.records, self.classifications, Rates()
         )
+        ids = {c.test_id for c in costs}
+        self.assertEqual(
+            ids,
+            {
+                "tests.payments.test_checkout.test_apply_coupon",
+                "tests.integration.test_sync.test_replica_catchup",
+            },
+        )
+
+    def test_coupon_cost_matches_hand_calc(self):
