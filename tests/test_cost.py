@@ -18,3 +18,12 @@ def _records():
     return group_by_test_commit(results)
 
 
+class TestCostModel(unittest.TestCase):
+    def setUp(self):
+        self.records = _records()
+        self.classifications = classify_all(self.records)
+
+    def test_only_flaky_tests_are_charged(self):
+        costs = cost_for_flaky_tests(
+            self.records, self.classifications, Rates()
+        )
