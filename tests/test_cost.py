@@ -76,3 +76,12 @@ class TestCliExitCodes(unittest.TestCase):
         with redirect_stdout(buf):
             code = cli.main(["version"])
         self.assertEqual(code, 0)
+        self.assertIn("flakeledger", buf.getvalue())
+
+    def test_ingest_clean(self):
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            code = cli.main(["ingest", str(SAMPLES)])
+        self.assertEqual(code, 0)
+
+    def test_classify_reports_findings(self):
