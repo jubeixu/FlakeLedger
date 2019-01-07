@@ -16,3 +16,9 @@ class TestJunitParsing(unittest.TestCase):
         self.assertTrue(all(r.attempt == 1 for r in results))
 
     def test_status_detection(self):
+        results, _ = parse_file(SAMPLES / "run-a1b2c3-attempt1.xml")
+        by_id = {r.test_id: r for r in results}
+        self.assertEqual(
+            by_id["tests.payments.test_checkout.test_apply_coupon"].status,
+            FAILED,
+        )
