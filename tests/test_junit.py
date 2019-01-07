@@ -35,3 +35,9 @@ class TestJunitParsing(unittest.TestCase):
         self.assertTrue(all(r.attempt == 1 for r in results))
 
     def test_time_parsing(self):
+        results, _ = parse_file(SAMPLES / "run-a1b2c3-attempt1.xml")
+        header = next(
+            r
+            for r in results
+            if r.name == "test_pdf_header"
+        )
