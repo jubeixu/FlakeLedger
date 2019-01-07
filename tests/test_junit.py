@@ -22,3 +22,9 @@ class TestJunitParsing(unittest.TestCase):
             by_id["tests.payments.test_checkout.test_apply_coupon"].status,
             FAILED,
         )
+        self.assertEqual(
+            by_id["tests.payments.test_checkout.test_total_with_tax"].status,
+            PASSED,
+        )
+
+    def test_reads_property_metadata_in_testsuites_wrapper(self):
