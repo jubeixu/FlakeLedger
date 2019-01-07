@@ -28,3 +28,10 @@ class TestJunitParsing(unittest.TestCase):
         )
 
     def test_reads_property_metadata_in_testsuites_wrapper(self):
+        results, warnings = parse_file(SAMPLES / "run-99aa88-attempt1.xml")
+        self.assertEqual(warnings, [])
+        self.assertEqual(len(results), 3)
+        self.assertTrue(all(r.commit == "99aa88" for r in results))
+        self.assertTrue(all(r.attempt == 1 for r in results))
+
+    def test_time_parsing(self):
