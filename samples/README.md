@@ -20,3 +20,9 @@ reads run identity.
   Commit d4e5f6, run twice. Same pattern: `test_apply_coupon` flakes again
   (its second flaky event), `test_pdf_header` fails on both attempts again.
 
+- `run-b7c8d9-attempt1.xml` and `run-b7c8d9-attempt2.xml`
+  Commit b7c8d9, run twice. `test_replica_catchup` fails then passes: a flake.
+  Its runtime is roughly 4.5s, much longer than the coupon test, which is why
+  it dominates the wasted compute figure.
+
+- `run-99aa88-attempt1.xml`
