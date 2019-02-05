@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="payments" commit="a1b2c3" attempt="2" tests="4" failures="1">
   <testcase classname="tests.payments.test_checkout" name="test_apply_coupon" time="0.788"/>
+  <testcase classname="tests.payments.test_checkout" name="test_total_with_tax" time="0.219"/>
+  <testcase classname="tests.auth.test_login" name="test_valid_password" time="0.101"/>
