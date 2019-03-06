@@ -1,2 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="integration" commit="b7c8d9" attempt="2" tests="3" failures="0">
+  <testcase classname="tests.integration.test_sync" name="test_replica_catchup" time="4.480"/>
