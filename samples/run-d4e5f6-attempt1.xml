@@ -2,3 +2,6 @@
 <testsuite name="payments" commit="d4e5f6" attempt="1" tests="4" failures="2">
   <testcase classname="tests.payments.test_checkout" name="test_apply_coupon" time="0.905">
     <failure message="AssertionError: expected 90 got 100">timeout waiting for rate limiter</failure>
+  </testcase>
+  <testcase classname="tests.payments.test_checkout" name="test_total_with_tax" time="0.230"/>
+  <testcase classname="tests.auth.test_login" name="test_valid_password" time="0.108"/>
