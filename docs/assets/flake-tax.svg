@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Palette reason: the subject is a cost ledger for flaky tests. Neutral slate
+  ink (#1f2933) carries the labels and axis, a flat teal (#0f6e6e) fills the
+  bars because teal reads as a measured, accounting colour rather than an
+  alarm, and a single amber accent (#b45309) marks the one test that costs the
