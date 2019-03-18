@@ -25,3 +25,10 @@
 
   <text x="24" y="34" font-size="17" font-weight="600" fill="#1f2933">Flake tax: total cost per flaky test</text>
   <text x="24" y="54" font-size="12" fill="#1f2933">Default rates: compute 0.008 USD/min, developer 1.50 USD/min, 15 dev min per flaky event.</text>
+
+  <!-- Plot area. Bars start at x=250. Scale: 45.0002 USD maps to 340px. -->
+  <!-- pixels per USD = 340 / 45.0002 = 7.5555 -->
+
+  <!-- Bar 1: test_apply_coupon, 45.0002 USD, amber accent (highest cost). -->
+  <text x="242" y="104" font-size="12" text-anchor="end" fill="#1f2933"
+        font-family="&quot;Cascadia Mono&quot;, &quot;JetBrains Mono&quot;, Consolas, &quot;DejaVu Sans Mono&quot;, monospace">test_apply_coupon</text>
