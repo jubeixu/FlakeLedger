@@ -16,3 +16,10 @@
     mark to the left shows one commit run twice: an amber filled cell for the
     failing attempt beside an open cell for the passing attempt, the pattern
     that defines a flaky test.
+  </desc>
+
+  <rect x="0" y="0" width="240" height="96" fill="#ffffff"/>
+
+  <!-- Mark: one commit, two attempts, differing outcomes. -->
+  <!-- Commit bracket on the left. -->
+  <rect x="24" y="34" width="3" height="28" fill="#1f2933"/>
