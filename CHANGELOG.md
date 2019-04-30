@@ -11,3 +11,4 @@ All notable changes to this project are documented here.
   the tests worth fixing or deleting.
 - `docs/assets/flake-tax.svg`: the flake taxonomy diagram.
 - Sample runs extended to six attempts across three commits.
+
