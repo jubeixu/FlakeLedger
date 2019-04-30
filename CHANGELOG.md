@@ -8,3 +8,4 @@ All notable changes to this project are documented here.
 
 ### Added
 - `report` ranks flakes by combined compute + developer-wait cost and names
+  the tests worth fixing or deleting.
