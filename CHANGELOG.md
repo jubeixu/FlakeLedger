@@ -16,3 +16,4 @@ All notable changes to this project are documented here.
 - Cost model rates are declared inputs with documented defaults, not
   hard-coded constants.
 
+## [0.4.0] - 2024-07-30
