@@ -13,3 +13,4 @@ All notable changes to this project are documented here.
 - Sample runs extended to six attempts across three commits.
 
 ### Changed
+- Cost model rates are declared inputs with documented defaults, not
