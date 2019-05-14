@@ -15,3 +15,4 @@ All notable changes to this project are documented here.
 ### Changed
 - Cost model rates are declared inputs with documented defaults, not
   hard-coded constants.
+
