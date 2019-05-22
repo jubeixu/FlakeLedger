@@ -17,3 +17,4 @@ All notable changes to this project are documented here.
   hard-coded constants.
 
 ## [0.4.0] - 2024-07-30
+
