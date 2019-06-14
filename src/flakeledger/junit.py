@@ -160,3 +160,31 @@ def parse_file(path: str | Path) -> tuple[list[CaseResult], list[str]]:
             )
 
         suite_name = suite.get("name", "")
+        for case in suite.findall("testcase"):
+            results.append(
+                CaseResult(
+                    commit=commit,
+                    attempt=attempt,
+                    suite=suite_name,
+                    classname=case.get("classname", ""),
+                    name=case.get("name", ""),
+                    status=_case_status(case),
+                    time_seconds=_parse_time(case.get("time")),
+                    source_file=path.name,
+                )
+            )
+
+    return results, warnings
+
+
+def parse_paths(paths: list[str | Path]) -> tuple[list[CaseResult], list[str]]:
+    """Parse many files, sorted by name for deterministic ordering."""
+
+    ordered = sorted(Path(p) for p in paths)
+    all_results: list[CaseResult] = []
+    all_warnings: list[str] = []
+    for p in ordered:
+        results, warnings = parse_file(p)
+        all_results.extend(results)
+        all_warnings.extend(warnings)
+# review note
