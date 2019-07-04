@@ -23,3 +23,4 @@ All notable changes to this project are documented here.
 - Undetermined classification for cases with too few attempts.
 
 ### Changed
+- JUnit reader accepts property-entry run identity as well as suite
