@@ -27,3 +27,4 @@ All notable changes to this project are documented here.
   attributes; malformed XML now raises a typed error instead of KeyError.
 
 ## [0.3.0] - 2022-11-02
+
