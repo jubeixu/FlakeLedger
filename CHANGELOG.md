@@ -26,3 +26,4 @@ All notable changes to this project are documented here.
 - JUnit reader accepts property-entry run identity as well as suite
   attributes; malformed XML now raises a typed error instead of KeyError.
 
+## [0.3.0] - 2022-11-02
