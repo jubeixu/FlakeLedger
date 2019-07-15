@@ -34,3 +34,4 @@ All notable changes to this project are documented here.
 - `classify` distinguishes flakes from genuine failures across reruns.
 
 ## [0.2.0] - 2021-03-19
+
