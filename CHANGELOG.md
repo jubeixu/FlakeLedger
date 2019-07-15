@@ -32,3 +32,4 @@ All notable changes to this project are documented here.
 - Attempt pairing by commit: reruns of the same commit are matched even when
   job ids differ.
 - `classify` distinguishes flakes from genuine failures across reruns.
+
