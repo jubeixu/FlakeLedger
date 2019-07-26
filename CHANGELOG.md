@@ -37,3 +37,4 @@ All notable changes to this project are documented here.
 
 ### Added
 - `runs` grouping: per-test outcome tables across runs of one commit.
+- Stable tests are excluded from the ledger by default.
