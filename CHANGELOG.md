@@ -39,3 +39,4 @@ All notable changes to this project are documented here.
 - `runs` grouping: per-test outcome tables across runs of one commit.
 - Stable tests are excluded from the ledger by default.
 
+## [0.1.0] - 2019-09-08
