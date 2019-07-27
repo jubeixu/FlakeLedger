@@ -4,22 +4,3 @@
   "flake" and teal (#0f6e6e) sets "ledger", a colour split at the morpheme
   boundary of the compound name. The amber accent (#b45309) fills exactly one
   cell of the mark: the failing attempt that, sitting next to a passing
-  attempt of the same commit, is the literal signature of a flake.
-  The mark is a real diagram of the core data structure: one commit, two
-  attempts, differing outcomes. Two 12px cells on a whole-pixel grid.
--->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 96" role="img"
-     aria-labelledby="title desc" font-family="-apple-system, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif">
-  <title id="title">flakeledger</title>
-  <desc id="desc">
-    Wordmark reading flakeledger, with flake in slate and ledger in teal. The
-    mark to the left shows one commit run twice: an amber filled cell for the
-    failing attempt beside an open cell for the passing attempt, the pattern
-    that defines a flaky test.
-  </desc>
-
-  <rect x="0" y="0" width="240" height="96" fill="#ffffff"/>
-
-  <!-- Mark: one commit, two attempts, differing outcomes. -->
-  <!-- Commit bracket on the left. -->
-  <rect x="24" y="34" width="3" height="28" fill="#1f2933"/>
