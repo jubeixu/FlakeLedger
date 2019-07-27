@@ -43,3 +43,4 @@ All notable changes to this project are documented here.
 
 ### Added
 - JUnit XML parsing with xml.etree, reading commit and attempt identity from
+  suite attributes or property entries.
