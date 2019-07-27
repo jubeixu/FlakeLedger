@@ -45,3 +45,4 @@ All notable changes to this project are documented here.
 - JUnit XML parsing with xml.etree, reading commit and attempt identity from
   suite attributes or property entries.
 - First CLI: `flakeledger run samples/*.xml --report ledger.md`.
+
