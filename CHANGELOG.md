@@ -42,3 +42,4 @@ All notable changes to this project are documented here.
 ## [0.1.0] - 2019-09-08
 
 ### Added
+- JUnit XML parsing with xml.etree, reading commit and attempt identity from
