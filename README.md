@@ -59,3 +59,35 @@ single observation there is no second attempt to compare against, so the data
 cannot distinguish a flake from a genuine failure. A tool that guessed here
 would be inventing a fact it does not have.
 
+FlakeLedger refuses to guess. By default a single failing attempt is labelled
+`undetermined`, and that label is a finding in its own right: it tells you the
+data is insufficient, not that the test is fine. If you want a decision anyway,
+you choose the rule explicitly with `--single-fail-policy`, and the chosen
+policy is printed at the top of the output so the decision is never hidden:
+
+| Policy value | Effect on a single failing attempt |
+|--------------|------------------------------------|
+| `undetermined` (default) | labelled undetermined, refuses to guess |
+| `genuine` | labelled genuine_failure, a conservative flake hunt |
+| `flake` | labelled flake, assumes a retry would have cleared it |
+
+The default is `undetermined` on purpose. Silently counting one red run as a
+flake would inflate the cost figure with tests that may be genuinely broken;
+silently counting it as genuine would hide real flakes that were simply not
+re-run. Neither silent choice is honest, so the honest default is to say the
+data does not decide.
+
+## Install
+
+```
+python -m pip install -e .
+```
+
+Or run without installing by putting the sources on the path:
+
+```
+set PYTHONPATH=src
+python -m FlakeLedger version
+```
+
+That prints `FlakeLedger 0.1.0` and exits clean.
