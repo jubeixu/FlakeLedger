@@ -219,3 +219,35 @@ ranked flaky test cost (highest first):
 total flaky cost 67.5008 USD
 ```
 
+Follow one test through all three stages. In ingest, `test_apply_coupon` on
+commit a1b2c3 is `failed` on attempt 1 (0.812s) and `passed` on attempt 2
+(0.788s). In classify that commit becomes one `flake` row, because one commit
+produced both a pass and a failure. In cost the coupon test carries two flaky
+events (a1b2c3 and d4e5f6), charged 2 events of developer wait, 30 minutes at
+1.50 USD, the 45.00 USD dominating its total.
+
+Note that `test_replica_catchup` flaked on only one commit yet its compute waste
+(0.075 min) is larger than the coupon test's (0.028 min): it runs about 4.5
+seconds per attempt against under a second, so a single rerun costs more compute.
+The coupon test still ranks first on total cost because it flaked on two commits,
+doubling its developer wait charge. That charge dwarfs the compute charge at the
+default rates, which is the model's honest shape: waiting humans cost far more
+than a rerun minute.
+
+## Reading the ranked report and what action each row should trigger
+
+The `cost` report is ordered highest total first, so the top row costs you the
+most under your rates. Read each row as a decision, not just a number:
+
+| What you see in a row | What it means | Action it should trigger |
+|-----------------------|---------------|--------------------------|
+| high `dev_wait` and high `events` | the test flakes often across many commits | fix or quarantine it first, it interrupts the most people |
+| high `wasted_compute` but few `events` | the test is slow and flaky, though rare | worth fixing if compute is your constraint, since one rerun is expensive |
+| a test near the top you do not recognise | a costly flake nobody owns | assign an owner before it keeps taxing everyone |
+| the `total flaky cost` line | the sum the flakes cost you under these rates | the size of the case for spending time on the top rows |
+
+A `genuine_failure` is a different action: it is a real bug that reproduces, so
+it belongs in the normal bug queue, not the flake queue. An `undetermined` row
+means re-run that commit for a second observation before deciding anything.
+
+## The flake tax asset
