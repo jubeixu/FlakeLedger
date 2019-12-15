@@ -379,3 +379,35 @@ The honest limits of the tool, kept and expanded:
 - It does not run your tests or trigger reruns. It reads XML that already
   exists.
 - It does not detect flakes within a single attempt. It needs at least two
+  attempts of the same commit to see a differing outcome, which is why the
+  single failing attempt is undetermined by default.
+- It does not model whole job rerun cost, cross test interference, or queueing
+  delay.
+- It does not read vendor specific fields beyond the common JUnit schema plus
+  the `commit` and `attempt` markers.
+
+## Design decisions
+
+The reasoning behind the choices that shaped the tool, including the alternative
+that was rejected.
+
+Same commit reruns are the unit of judgement. The alternative was to compare a
+test's outcome across different commits: if it passed on Monday and failed on
+Tuesday, call it flaky. That was rejected because the code changed between those
+commits, so a differing outcome is expected and proves nothing about
+nondeterminism. Holding the commit constant is the only way to isolate flakiness
+from real regressions, so the commit boundary is the unit and the tool never
+crosses it.
+
+Undetermined is the default for a single failing attempt. The alternative was to
+pick a side automatically, either assuming a retry would have passed (flake) or
+assuming the failure was real (genuine). Both were rejected as dishonest
+defaults: with one observation the data genuinely does not decide, and silently
+choosing either way would either inflate the flake bill with broken tests or
+bury real flakes. Surfacing `undetermined` as its own finding tells the user to
+gather a second observation, which is the correct next step, and the policy flag
+still lets a team opt into a side deliberately with the choice printed.
+
+Output is line oriented plain text, not JSON or a rich table. The alternative
+was structured output for machine parsing. Plain deterministic lines were chosen
+because the primary consumer is a human reading a git diff between two runs, and
