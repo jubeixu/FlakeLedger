@@ -14,3 +14,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" role="img"
      aria-labelledby="title desc" font-family="-apple-system, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif">
   <title id="title">Flake tax: cost per flaky test</title>
+  <desc id="desc">
+    Horizontal bar chart ranking two flaky tests by total attributed cost in
+    US dollars, computed by the flakeledger cost command on the sample runs
