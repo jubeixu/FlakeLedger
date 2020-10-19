@@ -251,3 +251,35 @@ it belongs in the normal bug queue, not the flake queue. An `undetermined` row
 means re-run that commit for a second observation before deciding anything.
 
 ## The flake tax asset
+
+The chart below is the `cost` ranking above drawn to scale, the same two tests
+and totals, built from the numbers the `cost` command printed on the samples so
+it moves only if those numbers move. It is the single picture to put in front of
+whoever decides where engineering time goes.
+
+![Horizontal bar chart ranking test_apply_coupon at 45.00 USD and test_replica_catchup at 22.50 USD by total attributed cost](docs/assets/flake-tax.svg)
+
+## JUnit input expectations
+
+FlakeLedger reads the common JUnit schema produced by pytest, Gradle, Maven
+Surefire, and similar tools: a `testsuites` root, or a single `testsuite`,
+containing `testcase` elements. Each `testcase` carries its outcome in a child
+element:
+
+| Child element | Outcome recorded |
+|---------------|------------------|
+| `<failure>` or `<error>` | failed |
+| `<skipped>` | skipped |
+| no child element | passed |
+
+Runtime is read from the `time` attribute in seconds. If a producer omits it,
+that test contributes zero compute waste.
+
+Run identity is not part of the base JUnit schema, so a producer must supply it.
+The parser accepts two fixture styles for the `commit` and `attempt` markers,
+and both are exercised by the samples.
+
+Style one, attributes on a bare `<testsuite>` (see
+`samples/run-a1b2c3-attempt1.xml`):
+
+```
