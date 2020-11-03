@@ -411,3 +411,35 @@ still lets a team opt into a side deliberately with the choice printed.
 Output is line oriented plain text, not JSON or a rich table. The alternative
 was structured output for machine parsing. Plain deterministic lines were chosen
 because the primary consumer is a human reading a git diff between two runs, and
+stable one record per line output makes that diff meaningful. A structured
+format can be layered on later without changing this decision.
+
+## Repository layout
+
+```
+FlakeLedger/
+  README.md                     this file
+  CHANGELOG.md                  version history
+  LICENSE                       MIT license
+  pyproject.toml                package metadata and the FlakeLedger entry point
+  .gitignore                    ignored paths
+  docs/
+    assets/
+      logo.svg                  the wordmark with the flake signature mark
+      flake-tax.svg             the ranked cost chart drawn from the sample run
+  samples/
+    README.md                   what each fixture proves and its expected labels
+    run-a1b2c3-attempt{1,2}.xml  commit a1b2c3 run twice, attribute style
+    run-d4e5f6-attempt{1,2}.xml  commit d4e5f6 run twice
+    run-b7c8d9-attempt{1,2}.xml  commit b7c8d9 run twice, the slow flake
+    run-99aa88-attempt1.xml     commit 99aa88, single green run, property style
+  src/
+    FlakeLedger/
+      __init__.py               package marker and version string
+      __main__.py               entry point for python -m FlakeLedger
+      cli.py                    argument parsing, subcommands, exit codes
+      junit.py                  JUnit XML parsing into case results
+      runs.py                   grouping of case results by test and commit
+      classify.py               labelling into flake, genuine, stable, undetermined
+      cost.py                   the cost model and per test ranking
+      report.py                 line oriented deterministic rendering
