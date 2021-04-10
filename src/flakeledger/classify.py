@@ -100,3 +100,22 @@ def classify_one(
         commit=record.commit,
         label=label,
         attempt_count=n,
+        passes=passes,
+        failures=failures,
+        skips=skips,
+        reason=reason,
+    )
+
+
+def classify_all(
+    records: list[TestOnCommit],
+    single_fail_policy: str = SINGLE_FAIL_UNDETERMINED,
+) -> list[Classification]:
+    if single_fail_policy not in _SINGLE_FAIL_POLICIES:
+        raise ValueError(
+            f"unknown single_fail_policy '{single_fail_policy}', "
+            f"expected one of {_SINGLE_FAIL_POLICIES}"
+        )
+    out = [classify_one(r, single_fail_policy) for r in records]
+    # Sorted for deterministic output.
+# review note
