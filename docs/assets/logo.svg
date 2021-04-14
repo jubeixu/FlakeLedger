@@ -4,3 +4,6 @@
   "flake" and teal (#0f6e6e) sets "ledger", a colour split at the morpheme
   boundary of the compound name. The amber accent (#b45309) fills exactly one
   cell of the mark: the failing attempt that, sitting next to a passing
+  attempt of the same commit, is the literal signature of a flake.
+  The mark is a real diagram of the core data structure: one commit, two
+  attempts, differing outcomes. Two 12px cells on a whole-pixel grid.
