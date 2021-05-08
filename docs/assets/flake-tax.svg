@@ -33,3 +33,6 @@
   <text x="242" y="104" font-size="12" text-anchor="end" fill="#1f2933"
         font-family="&quot;Cascadia Mono&quot;, &quot;JetBrains Mono&quot;, Consolas, &quot;DejaVu Sans Mono&quot;, monospace">test_apply_coupon</text>
   <rect x="250" y="90" width="340" height="24" fill="#b45309"/>
+  <text x="598" y="107" font-size="12" fill="#1f2933">45.00 USD</text>
+
+  <!-- Bar 2: test_replica_catchup, 22.5006 USD, teal. 22.5006 * 7.5555 = 170px. -->
