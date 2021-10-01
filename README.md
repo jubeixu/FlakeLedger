@@ -347,3 +347,35 @@ least one test was charged. This makes the tool usable as a CI gate.
 
 Add a step after your test runs that points `cost` (or `classify`) at the
 directory of collected JUnit XML. A non-zero exit fails the step, which is how
+you turn a growing flake bill into something the pipeline notices:
+
+```
+set PYTHONPATH=src
+python -m FlakeLedger cost path/to/junit-xml
+```
+
+Because the output is deterministic and line oriented, you can commit a report
+and diff two runs to see whether a flake was fixed or a new one appeared. Sort
+order is stable (by total cost then test id for `cost`, by test id then commit
+for `classify`), so a diff shows only real changes, not reordering noise.
+
+## Limitations
+
+The honest limits of the tool, kept and expanded:
+
+- The cost is an estimate built on declared rates, not a measurement of money
+  that left an account. Every figure is only as good as the three rates you
+  supply, and the defaults are placeholders, not your real costs. Treat the
+  total as the output of a model whose inputs you own.
+- The compute figure counts only the flaky test's own runtime. In real CI a
+  flake usually forces a rerun of a whole job, so the true compute waste is
+  larger than reported. This is a deliberate lower bound, because job
+  composition is not in the JUnit data and FlakeLedger will not guess it.
+- The developer wait figure is a flat per event estimate, not a measurement of
+  any real person's time. Treat it as a knob, not a fact.
+- Runtimes come from the `time` attribute in the XML. If a producer omits it,
+  that test contributes zero compute waste, which understates the cost of slow
+  flakes that do not report timing.
+- It does not run your tests or trigger reruns. It reads XML that already
+  exists.
+- It does not detect flakes within a single attempt. It needs at least two
