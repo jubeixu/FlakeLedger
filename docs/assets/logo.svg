@@ -1,3 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   Palette reason: same ledger subject as the diagram. Slate ink (#1f2933) sets
+  "flake" and teal (#0f6e6e) sets "ledger", a colour split at the morpheme
+  boundary of the compound name. The amber accent (#b45309) fills exactly one
+  cell of the mark: the failing attempt that, sitting next to a passing
