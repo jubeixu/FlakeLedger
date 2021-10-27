@@ -10,3 +10,6 @@
 -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 96" role="img"
      aria-labelledby="title desc" font-family="-apple-system, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif">
+  <title id="title">flakeledger</title>
+  <desc id="desc">
+    Wordmark reading flakeledger, with flake in slate and ledger in teal. The
