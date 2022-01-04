@@ -6,3 +6,7 @@
   alarm, and a single amber accent (#b45309) marks the one test that costs the
   most, which is where the reader should look first. Two colours plus one
   accent, no gradient, no glow.
+  Numbers: produced by `flakeledger cost samples` with default rates
+  (compute 0.008 USD/min, dev 1.50 USD/min, 15 dev min per flaky event).
+    test_apply_coupon   total 45.0002 USD
+    test_replica_catchup total 22.5006 USD
