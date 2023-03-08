@@ -71,3 +71,20 @@ def render_cost(costs: list[TestCost], rates: Rates, currency: str) -> str:
 
     total = 0.0
     for i, c in enumerate(costs, start=1):
+        total += c.total_cost
+        lines.append(
+            f"  {i}. {c.test_id}"
+        )
+        lines.append(
+            f"     events={c.flaky_events} "
+            f"wasted_compute={c.wasted_compute_minutes:.3f}min "
+            f"dev_wait={c.dev_wait_minutes:.1f}min"
+        )
+        lines.append(
+            f"     compute_cost={c.compute_cost:.4f} {currency} "
+            f"dev_cost={c.dev_cost:.4f} {currency} "
+            f"total={c.total_cost:.4f} {currency}"
+        )
+    lines.append("")
+    lines.append(f"total flaky cost {total:.4f} {currency}")
+# review note
