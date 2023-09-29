@@ -91,3 +91,35 @@ python -m FlakeLedger version
 ```
 
 That prints `FlakeLedger 0.1.0` and exits clean.
+
+## Commands
+
+| Command | What it does |
+|---------|--------------|
+| `ingest` | parse JUnit XML and list every case result, one per line |
+| `classify` | label each test on each commit as flake, genuine, stable, undetermined |
+| `cost` | rank flaky tests by attributed cost using explicit rates |
+| `version` | print the version and exit |
+
+Run identity is read from each `testsuite`, either as `commit` and `attempt`
+attributes or as `<property>` entries. Point any command at files or at a
+directory of `*.xml`. A directory expands to its `*.xml` files, sorted by name;
+a file is used as itself. Nonexistent paths are ignored, and if the whole input
+set resolves to no XML files the command exits with a usage error rather than
+crashing on a missing file.
+
+`classify` and `cost` also accept `--single-fail-policy`. `cost` additionally
+accepts the three rate flags and a `--currency` label described next.
+
+## The cost model
+
+Every rate is an input, not a fact. The defaults exist so a run produces
+numbers, but they are placeholders for values you should measure yourself.
+Nothing here is a universal truth.
+
+| Rate flag | Default | Unit | What it means |
+|-----------|---------|------|---------------|
+| `--compute-rate-per-minute` | 0.008 | currency per compute minute | money cost of one CI compute minute |
+| `--dev-rate-per-minute` | 1.50 | currency per developer minute | money cost of one developer minute |
+| `--dev-wait-minutes-per-flaky-event` | 15.0 | developer minutes per event | time one flaky event burns while someone waits on and re-triggers a red pipeline |
+| `--currency` | USD | label only | text printed next to figures, no conversion |
