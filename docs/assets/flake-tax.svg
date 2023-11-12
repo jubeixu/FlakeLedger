@@ -36,3 +36,7 @@
   <text x="598" y="107" font-size="12" fill="#1f2933">45.00 USD</text>
 
   <!-- Bar 2: test_replica_catchup, 22.5006 USD, teal. 22.5006 * 7.5555 = 170px. -->
+  <text x="242" y="154" font-size="12" text-anchor="end" fill="#1f2933"
+        font-family="&quot;Cascadia Mono&quot;, &quot;JetBrains Mono&quot;, Consolas, &quot;DejaVu Sans Mono&quot;, monospace">test_replica_catchup</text>
+  <rect x="250" y="140" width="170" height="24" fill="#0f6e6e"/>
+  <text x="428" y="157" font-size="12" fill="#1f2933">22.50 USD</text>
