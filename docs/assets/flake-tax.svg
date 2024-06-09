@@ -17,3 +17,7 @@
   <desc id="desc">
     Horizontal bar chart ranking two flaky tests by total attributed cost in
     US dollars, computed by the flakeledger cost command on the sample runs
+    using the default rates. test_apply_coupon costs 45.00 dollars over 2
+    flaky events. test_replica_catchup costs 22.50 dollars over 1 flaky event.
+  </desc>
+
