@@ -22,3 +22,6 @@
 
   <!-- Mark: one commit, two attempts, differing outcomes. -->
   <!-- Commit bracket on the left. -->
+  <rect x="24" y="34" width="3" height="28" fill="#1f2933"/>
+  <!-- Attempt 1: failed, amber filled cell. -->
+  <rect x="33" y="36" width="12" height="12" rx="3" fill="#b45309"/>
