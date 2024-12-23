@@ -13,3 +13,6 @@
   <title id="title">flakeledger</title>
   <desc id="desc">
     Wordmark reading flakeledger, with flake in slate and ledger in teal. The
+    mark to the left shows one commit run twice: an amber filled cell for the
+    failing attempt beside an open cell for the passing attempt, the pattern
+    that defines a flaky test.
