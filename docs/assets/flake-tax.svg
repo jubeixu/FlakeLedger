@@ -40,3 +40,7 @@
         font-family="&quot;Cascadia Mono&quot;, &quot;JetBrains Mono&quot;, Consolas, &quot;DejaVu Sans Mono&quot;, monospace">test_replica_catchup</text>
   <rect x="250" y="140" width="170" height="24" fill="#0f6e6e"/>
   <text x="428" y="157" font-size="12" fill="#1f2933">22.50 USD</text>
+
+  <!-- Axis line and ticks along the bottom of the plot. -->
+  <line x1="250" y1="200" x2="590" y2="200" stroke="#1f2933" stroke-width="1"/>
+  <!-- 0 -->
