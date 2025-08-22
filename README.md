@@ -283,3 +283,35 @@ Style one, attributes on a bare `<testsuite>` (see
 `samples/run-a1b2c3-attempt1.xml`):
 
 ```
+<testsuite name="payments" commit="a1b2c3" attempt="1" tests="4" failures="2">
+  <testcase classname="tests.payments.test_checkout" name="test_apply_coupon" time="0.812"/>
+</testsuite>
+```
+
+Style two, `<property>` entries inside a `<testsuites>` wrapper (see
+`samples/run-99aa88-attempt1.xml`):
+
+```
+<testsuites>
+  <testsuite name="payments" tests="3" failures="0">
+    <properties>
+      <property name="commit" value="99aa88"/>
+      <property name="attempt" value="1"/>
+    </properties>
+  </testsuite>
+</testsuites>
+```
+
+When both markers are absent, FlakeLedger falls back to documented defaults
+(`commit=unknown-commit`, `attempt=1`) and records a warning rather than
+guessing silently. The `attempt` value defaults to 1 for the first run and rises
+for each rerun of the same commit.
+
+## Output format
+
+All output is line oriented plain text so two runs diff cleanly in git. The
+fields per command are a contract:
+
+| Command | Field | Meaning |
+|---------|-------|---------|
+| ingest | `case <commit>` | the commit the run was for |
