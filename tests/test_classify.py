@@ -80,3 +80,22 @@ class TestClassification(unittest.TestCase):
     def test_single_fail_policy_genuine(self):
         rec = self._single_fail_record()
         self.assertEqual(
+            classify_one(rec, SINGLE_FAIL_GENUINE).label, GENUINE_FAILURE
+        )
+
+    def test_single_fail_policy_flake(self):
+        rec = self._single_fail_record()
+        self.assertEqual(classify_one(rec, SINGLE_FAIL_FLAKE).label, FLAKE)
+
+    def test_unknown_policy_rejected(self):
+        with self.assertRaises(ValueError):
+            classify_all(self.records, "nonsense")
+
+    def test_output_is_sorted(self):
+        cs = classify_all(self.records)
+        keys = [(c.test_id, c.commit) for c in cs]
+        self.assertEqual(keys, sorted(keys))
+
+
+if __name__ == "__main__":
+    unittest.main()
