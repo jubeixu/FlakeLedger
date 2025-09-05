@@ -85,3 +85,22 @@ class TestCliExitCodes(unittest.TestCase):
         self.assertEqual(code, 0)
 
     def test_classify_reports_findings(self):
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            code = cli.main(["classify", str(SAMPLES)])
+        # Flakes and genuine failures exist, so findings exit code.
+        self.assertEqual(code, 1)
+
+    def test_cost_reports_findings(self):
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            code = cli.main(["cost", str(SAMPLES)])
+        self.assertEqual(code, 1)
+
+    def test_missing_input_is_usage_error(self):
+        code = cli.main(["ingest", str(SAMPLES / "does-not-exist-dir")])
+        self.assertEqual(code, 2)
+
+
+if __name__ == "__main__":
+    unittest.main()
