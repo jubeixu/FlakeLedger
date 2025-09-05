@@ -41,3 +41,14 @@ class TestJunitParsing(unittest.TestCase):
             for r in results
             if r.name == "test_pdf_header"
         )
+        self.assertAlmostEqual(header.time_seconds, 1.930, places=3)
+
+    def test_parse_paths_is_sorted_and_complete(self):
+        files = sorted(str(p) for p in SAMPLES.glob("*.xml"))
+        results, _ = parse_paths(files)
+        # a1b2c3: 4 + 4, d4e5f6: 4 + 4, b7c8d9: 3 + 3, 99aa88: 3 = 25 rows.
+        self.assertEqual(len(results), 25)
+
+
+if __name__ == "__main__":
+    unittest.main()
