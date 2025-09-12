@@ -162,3 +162,34 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "ingest":
         sys.stdout.write(report.render_ingest(results, warnings))
+        return EXIT_CLEAN
+
+    records = group_by_test_commit(results)
+
+    if args.command == "classify":
+        classifications = classify_all(records, args.single_fail_policy)
+        sys.stdout.write(
+            report.render_classify(classifications, args.single_fail_policy)
+        )
+        findings = any(
+            c.label in (FLAKE, GENUINE_FAILURE, UNDETERMINED)
+            for c in classifications
+        )
+        return EXIT_FINDINGS if findings else EXIT_CLEAN
+
+    if args.command == "cost":
+        classifications = classify_all(records, args.single_fail_policy)
+        rates = Rates(
+            compute_rate_per_minute=args.compute_rate_per_minute,
+            dev_rate_per_minute=args.dev_rate_per_minute,
+            dev_wait_minutes_per_flaky_event=args.dev_wait_minutes_per_flaky_event,
+        )
+        costs = cost_for_flaky_tests(records, classifications, rates)
+        sys.stdout.write(report.render_cost(costs, rates, args.currency))
+        return EXIT_FINDINGS if costs else EXIT_CLEAN
+
+    return EXIT_USAGE
+
+
+if __name__ == "__main__":
+# review note
