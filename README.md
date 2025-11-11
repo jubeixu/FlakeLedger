@@ -155,3 +155,35 @@ python -m FlakeLedger ingest samples
 ```
 
 ```
+cases 25
+commits 4
+commit 99aa88
+commit a1b2c3
+commit b7c8d9
+commit d4e5f6
+case 99aa88 attempt=1 tests.auth.test_login.test_valid_password passed time=0.100s
+case 99aa88 attempt=1 tests.payments.test_checkout.test_apply_coupon passed time=0.790s
+case 99aa88 attempt=1 tests.payments.test_checkout.test_total_with_tax passed time=0.218s
+case a1b2c3 attempt=1 tests.auth.test_login.test_valid_password passed time=0.104s
+case a1b2c3 attempt=1 tests.payments.test_checkout.test_apply_coupon failed time=0.812s
+case a1b2c3 attempt=1 tests.payments.test_checkout.test_total_with_tax passed time=0.221s
+case a1b2c3 attempt=1 tests.reports.test_export.test_pdf_header failed time=1.930s
+case a1b2c3 attempt=2 tests.payments.test_checkout.test_apply_coupon passed time=0.788s
+... (17 more case lines trimmed for length, 25 total; the two flaky pairs are)
+case b7c8d9 attempt=1 tests.integration.test_sync.test_replica_catchup failed time=4.510s
+case b7c8d9 attempt=2 tests.integration.test_sync.test_replica_catchup passed time=4.480s
+case d4e5f6 attempt=1 tests.payments.test_checkout.test_apply_coupon failed time=0.905s
+case d4e5f6 attempt=2 tests.payments.test_checkout.test_apply_coupon passed time=0.842s
+```
+
+Classify collapses those 25 rows into one label per test per commit. Command:
+
+```
+python -m FlakeLedger classify samples
+```
+
+```
+policy single_fail=undetermined
+count flake 3
+count genuine_failure 2
+count stable 9
