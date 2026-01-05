@@ -26,3 +26,15 @@ reads run identity.
   it dominates the wasted compute figure.
 
 - `run-99aa88-attempt1.xml`
+  Commit 99aa88, run once, all green. Confirms that stable tests are never
+  charged and that the single-attempt path with no failure is not a finding.
+
+## Expected classifications
+
+- `tests.payments.test_checkout.test_apply_coupon`  flake on a1b2c3 and d4e5f6
+- `tests.integration.test_sync.test_replica_catchup`  flake on b7c8d9
+- `tests.reports.test_export.test_pdf_header`  genuine failure on a1b2c3, d4e5f6
+- `tests.payments.test_checkout.test_total_with_tax`  stable everywhere
+- `tests.auth.test_login.test_valid_password`  stable everywhere
+
+# draft note 4
