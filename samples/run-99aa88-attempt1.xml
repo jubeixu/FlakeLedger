@@ -5,3 +5,10 @@
       <property name="commit" value="99aa88"/>
       <property name="attempt" value="1"/>
     </properties>
+    <testcase classname="tests.payments.test_checkout" name="test_apply_coupon" time="0.790"/>
+    <testcase classname="tests.payments.test_checkout" name="test_total_with_tax" time="0.218"/>
+    <testcase classname="tests.auth.test_login" name="test_valid_password" time="0.100"/>
+  </testsuite>
+</testsuites>
+
+# draft note 5
