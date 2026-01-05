@@ -187,4 +187,4 @@ def parse_paths(paths: list[str | Path]) -> tuple[list[CaseResult], list[str]]:
         results, warnings = parse_file(p)
         all_results.extend(results)
         all_warnings.extend(warnings)
-# review note
+    return all_results, all_warnings
