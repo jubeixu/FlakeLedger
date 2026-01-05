@@ -69,3 +69,18 @@ def group_by_test_commit(results: list[CaseResult]) -> list[TestOnCommit]:
             buckets[key] = bucket
         bucket.attempts.append(r)
 
+    return [buckets[k] for k in sorted(buckets)]
+
+
+def commits_seen(results: list[CaseResult]) -> list[str]:
+    return sorted({r.commit for r in results})
+
+
+def attempts_per_commit(results: list[CaseResult]) -> dict[str, int]:
+    """Highest attempt number observed for each commit."""
+
+    highest: dict[str, int] = defaultdict(int)
+    for r in results:
+        if r.attempt > highest[r.commit]:
+            highest[r.commit] = r.attempt
+    return dict(sorted(highest.items()))
