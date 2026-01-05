@@ -5,3 +5,9 @@
   </testcase>
   <testcase classname="tests.payments.test_checkout" name="test_total_with_tax" time="0.221"/>
   <testcase classname="tests.auth.test_login" name="test_valid_password" time="0.104"/>
+  <testcase classname="tests.reports.test_export" name="test_pdf_header" time="1.930">
+    <failure message="KeyError: 'title'">missing template key</failure>
+  </testcase>
+</testsuite>
+
+# draft note 6
