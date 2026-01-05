@@ -46,3 +46,10 @@ All notable changes to this project are documented here.
   suite attributes or property entries.
 - First CLI: `flakeledger run samples/*.xml --report ledger.md`.
 
+## [0.0.1] - 2018-05-14
+
+### Added
+- Initial prototype: single-file JUnit reader and a hardcoded diff of two
+  attempts.
+
+# draft note 1
