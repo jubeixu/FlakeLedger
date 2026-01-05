@@ -15,3 +15,10 @@ keywords = ["junit", "flaky-tests", "ci", "test-analytics"]
 [project.scripts]
 flakeledger = "flakeledger.cli:main"
 
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+flakeledger = ["py.typed"]
+
+# draft note 3
