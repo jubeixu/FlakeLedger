@@ -3,3 +3,8 @@
   <testcase classname="tests.integration.test_sync" name="test_replica_catchup" time="4.510">
     <failure message="TimeoutError: replica lagged past 3s window">nondeterministic replica timing</failure>
   </testcase>
+  <testcase classname="tests.payments.test_checkout" name="test_total_with_tax" time="0.222"/>
+  <testcase classname="tests.auth.test_login" name="test_valid_password" time="0.103"/>
+</testsuite>
+
+# draft note 8
