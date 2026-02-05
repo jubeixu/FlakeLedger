@@ -97,3 +97,22 @@ def cost_for_flaky_tests(
         )
         slot["events"] += 1
         slot["wasted_minutes"] += wasted_minutes
+        slot["dev_minutes"] += rates.dev_wait_minutes_per_flaky_event
+
+    costs: list[TestCost] = []
+    for test_id, slot in agg.items():
+        compute_cost = slot["wasted_minutes"] * rates.compute_rate_per_minute
+        dev_cost = slot["dev_minutes"] * rates.dev_rate_per_minute
+        costs.append(
+            TestCost(
+                test_id=test_id,
+                flaky_events=int(slot["events"]),
+                wasted_compute_minutes=slot["wasted_minutes"],
+                dev_wait_minutes=slot["dev_minutes"],
+                compute_cost=compute_cost,
+                dev_cost=dev_cost,
+            )
+        )
+
+    costs.sort(key=lambda c: (-round(c.total_cost, 6), c.test_id))
+    return costs
