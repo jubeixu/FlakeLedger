@@ -118,4 +118,4 @@ def classify_all(
         )
     out = [classify_one(r, single_fail_policy) for r in records]
     # Sorted for deterministic output.
-# review note
+    return sorted(out, key=lambda c: (c.test_id, c.commit))
