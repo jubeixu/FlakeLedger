@@ -37,4 +37,4 @@ reads run identity.
 - `tests.payments.test_checkout.test_total_with_tax`  stable everywhere
 - `tests.auth.test_login.test_valid_password`  stable everywhere
 
-# draft note 56
+# draft note 69
