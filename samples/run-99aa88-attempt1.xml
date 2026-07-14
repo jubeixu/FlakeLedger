@@ -10,5 +10,3 @@
     <testcase classname="tests.auth.test_login" name="test_valid_password" time="0.100"/>
   </testsuite>
 </testsuites>
-
-# draft note 18
