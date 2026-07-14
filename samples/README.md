@@ -36,5 +36,3 @@ reads run identity.
 - `tests.reports.test_export.test_pdf_header`  genuine failure on a1b2c3, d4e5f6
 - `tests.payments.test_checkout.test_total_with_tax`  stable everywhere
 - `tests.auth.test_login.test_valid_password`  stable everywhere
-
-# draft note 17
