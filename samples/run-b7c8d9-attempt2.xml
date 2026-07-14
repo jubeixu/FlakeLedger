@@ -4,5 +4,3 @@
   <testcase classname="tests.payments.test_checkout" name="test_total_with_tax" time="0.220"/>
   <testcase classname="tests.auth.test_login" name="test_valid_password" time="0.101"/>
 </testsuite>
-
-# draft note 22
