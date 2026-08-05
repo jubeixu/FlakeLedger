@@ -51,5 +51,3 @@ All notable changes to this project are documented here.
 ### Added
 - Initial prototype: single-file JUnit reader and a hardcoded diff of two
   attempts.
-
-# draft note 27
