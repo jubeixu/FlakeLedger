@@ -20,5 +20,3 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 flakeledger = ["py.typed"]
-
-# draft note 42
