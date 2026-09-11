@@ -60,11 +60,14 @@ class CaseResult:
         return self.name
 
 
-def _read_run_metadata(elem: ET.Element) -> tuple[str, int, bool]:
-    """Return (commit, attempt, used_default) from a suite-level element.
+def _read_run_metadata(elem: ET.Element) -> tuple[str, int, bool, bool]:
+    """Return (commit, attempt, used_default, bad_attempt) from a suite element.
 
     Reads attributes first, then `<property name=...>` children. Missing
     values fall back to documented defaults and set used_default to True.
+    bad_attempt is set when an attempt value is present but not a valid
+    integer, so callers can warn about malformed metadata instead of
+    silently treating it as absent.
     """
 
     commit = elem.get("commit")
@@ -79,6 +82,7 @@ def _read_run_metadata(elem: ET.Element) -> tuple[str, int, bool]:
                 attempt_raw = prop.get("value")
 
     used_default = False
+    bad_attempt = False
     if commit is None:
         commit = _UNKNOWN_COMMIT
         used_default = True
@@ -91,8 +95,9 @@ def _read_run_metadata(elem: ET.Element) -> tuple[str, int, bool]:
         except ValueError:
             attempt = _DEFAULT_ATTEMPT
             used_default = True
+            bad_attempt = True
 
-    return commit, attempt, used_default
+    return commit, attempt, used_default, bad_attempt
 
 
 def _case_status(case: ET.Element) -> str:
@@ -145,14 +150,19 @@ def parse_file(path: str | Path) -> tuple[list[CaseResult], list[str]]:
             continue
         seen_suites.add(marker)
 
-        commit, attempt, used_default = _read_run_metadata(suite)
+        commit, attempt, used_default, bad_attempt = _read_run_metadata(suite)
         if used_default:
-            fallback = _read_run_metadata(root)
-            commit_r, attempt_r, root_default = fallback
+            commit_r, attempt_r, root_default, root_bad = _read_run_metadata(root)
             if not root_default:
                 commit, attempt, used_default = commit_r, attempt_r, False
+                bad_attempt = root_bad
 
-        if used_default:
+        if bad_attempt:
+            warnings.append(
+                f"{path.name}: suite '{suite.get('name', '')}' has a "
+                f"non-integer attempt value, used default {attempt}"
+            )
+        elif used_default:
             warnings.append(
                 f"{path.name}: suite '{suite.get('name', '')}' missing commit "
                 f"or attempt metadata, used defaults "

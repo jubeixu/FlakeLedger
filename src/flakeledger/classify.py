@@ -73,7 +73,12 @@ def classify_one(
 
     if failures == 0:
         label = STABLE
-        reason = f"all {n} attempt(s) passed or skipped, no failures"
+        if passes == 0 and skips > 0:
+            # Skipped every time: no pass or failure signal was observed, so
+            # the reason says exactly that instead of claiming a pass happened.
+            reason = f"all {n} attempt(s) skipped, no pass or failure signal"
+        else:
+            reason = f"all {n} attempt(s) passed or skipped, no failures"
     elif passes > 0 and failures > 0:
         label = FLAKE
         reason = (

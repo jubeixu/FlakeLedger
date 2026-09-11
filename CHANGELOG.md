@@ -4,6 +4,10 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+- fixed: malformed (non-integer) attempt metadata now warns instead of silently defaulting
+- fixed: skip-only records report a precise reason instead of claiming a pass
+- fixed: cost rates are validated as non-negative before any figures are printed
+
 ## [0.5.0] - 2026-08-05
 
 ### Added

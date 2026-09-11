@@ -178,6 +178,19 @@ def main(argv: list[str] | None = None) -> int:
         return EXIT_FINDINGS if findings else EXIT_CLEAN
 
     if args.command == "cost":
+        for flag, value in (
+            ("--compute-rate-per-minute", args.compute_rate_per_minute),
+            ("--dev-rate-per-minute", args.dev_rate_per_minute),
+            (
+                "--dev-wait-minutes-per-flaky-event",
+                args.dev_wait_minutes_per_flaky_event,
+            ),
+        ):
+            if value < 0:
+                sys.stderr.write(
+                    f"error: {flag} must be non-negative (got {value})\n"
+                )
+                return EXIT_USAGE
         classifications = classify_all(records, args.single_fail_policy)
         rates = Rates(
             compute_rate_per_minute=args.compute_rate_per_minute,
